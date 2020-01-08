@@ -10,22 +10,22 @@ module.exports = {
     // github: ``,
   },
   plugins: [
-    `gatsby-plugin-netlify-cms`,
+    // `gatsby-plugin-netlify-cms`,
     `gatsby-plugin-react-helmet`,
-    "gatsby-plugin-robots-txt",
+    // "gatsby-plugin-robots-txt",
     `gatsby-plugin-sass`,
     `gatsby-plugin-sharp`,
-    `gatsby-plugin-sitemap`,
+    // `gatsby-plugin-sitemap`,
     `gatsby-plugin-transition-link`,
     `gatsby-transformer-sharp`,
-    {
-      resolve: "gatsby-plugin-robots-txt",
-      options: {
-        host: "https://ericlugo.me/",
-        sitemap: "https://ericlugo.me/sitemap.xml",
-        policy: [{ userAgent: "*", allow: "/" }],
-      },
-    },
+    // {
+    //   resolve: "gatsby-plugin-robots-txt",
+    //   options: {
+    //     host: "https://ericlugo.me/",
+    //     sitemap: "https://ericlugo.me/sitemap.xml",
+    //     policy: [{ userAgent: "*", allow: "/" }],
+    //   },
+    // },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
