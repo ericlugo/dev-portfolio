@@ -1,10 +1,15 @@
 import React from "react"
 
+import "../sass/globalStyles.sass"
+
+import Layout from "../components/Layout"
 import Avatar from "../components/Avatar"
+import Toggle from "../components/Toggle"
 
 export default () => (
-  <div>
+  <Layout>
     <h1>Hello World</h1>
-    <Avatar width="20rem" />
-  </div>
+    <Avatar height="14rem" width="10rem" />
+    <Toggle />
+  </Layout>
 )
