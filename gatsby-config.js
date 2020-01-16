@@ -13,9 +13,9 @@ module.exports = {
     // `gatsby-plugin-netlify-cms`,
     `gatsby-plugin-react-helmet`,
     // "gatsby-plugin-robots-txt",
-    `gatsby-plugin-sass`,
     `gatsby-plugin-sharp`,
     // `gatsby-plugin-sitemap`,
+    `gatsby-plugin-styled-components`,
     `gatsby-plugin-transition-link`,
     `gatsby-transformer-sharp`,
     // {
