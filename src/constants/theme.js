@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components"
+import { createGlobalStyle, css } from "styled-components"
 import reset from "styled-reset"
 
 const palettes = {
@@ -155,22 +155,26 @@ export const GlobalStyle = createGlobalStyle`
   p {
     line-height: ${props => props.theme.typography.lineHeight};
   }
-  .code {
-    font-family: ${props => props.theme.typography.codeFont};
-  }
   .raised {
-    margin: .5rem;
-    border-radius: 1rem;
-    box-shadow: ${props => props.theme.effects.shadow};
   }
   .inset {
-    height: 100%;
-    width: 100%;
-    border-radius: .5rem;
-    box-shadow: ${props => props.theme.effects.inset};
   }
   .widthContainer {
-    margin: 0 auto;
-    max-width: 1200px;
   }
+`
+
+export const raised = css`
+  margin: 0.5rem;
+  border-radius: 1rem;
+  box-shadow: ${props => props.theme.effects.shadow};
+`
+export const inset = css`
+  height: 100%;
+  width: 100%;
+  border-radius: 0.5rem;
+  box-shadow: ${props => props.theme.effects.inset};
+`
+export const maxWidth = css`
+  margin: 0 auto;
+  max-width: 1200px;
 `

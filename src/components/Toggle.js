@@ -2,32 +2,22 @@ import React from "react"
 import styled from "styled-components"
 import { FiMoon, FiSun } from "react-icons/fi"
 
-// NOTE: The below units are in rem
-const switchHeight = 1.5
-const switchWidth = switchHeight * 2
-const slideDiameter = switchHeight
-
-const Toggle = ({ className }) => (
+const Toggle = ({ className, height }) => (
   <div className={className}>
-    <div className="container">
-      <FiSun className="icon" />
-      <label>
-        <input type="checkbox" className="switch" />
-        <span className="slider inset"></span>
-      </label>
-      <FiMoon className="icon" />
-    </div>
+    <FiSun className="icon" />
+    <label>
+      <input type="checkbox" className="switch" />
+      <span className="slider"></span>
+    </label>
+    <FiMoon className="icon" />
   </div>
 )
 
 export default styled(Toggle)`
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
 
-  .container {
-    display: flex;
-    align-items: center;
-    padding: 0.25rem 0.25rem;
-  }
   .icon {
     color: ${props => props.theme.colors.foregroundColor};
     font-size: 1.5rem;
@@ -38,23 +28,24 @@ export default styled(Toggle)`
     &:checked ~ .slider {
       background-color: ${props => props.theme.colors.toggle.switchActive};
       &::after {
-        left: 1.5rem;
+        left: ${props => props.height};
       }
     }
   }
   .slider {
-    height: ${switchHeight}rem;
-    width: ${switchWidth}rem;
+    height: ${props => props.height};
+    width: ${props => props.width};
     display: block;
     border: 2px solid ${props => props.theme.colors.toggle.default};
-    border-radius: ${switchHeight}rem;
+    border-radius: ${props => props.height};
     background-color: rgba(black, 0.06);
+    box-shadow: ${props => props.theme.effects.inset};
     position: relative;
     &::after {
       transition: left 0.3s ease-in-out;
       content: " ";
-      height: ${slideDiameter}rem;
-      width: ${slideDiameter}rem;
+      height: ${props => props.height};
+      width: ${props => props.height};
       display: block;
       background-color: ${props => props.theme.colors.toggle.notchActive};
       border-radius: 50%;

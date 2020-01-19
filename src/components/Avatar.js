@@ -1,14 +1,8 @@
 import React from "react"
 import styled from "styled-components"
 
-const SVG = ({ height = 735, ...rest }) => (
-  <svg
-    width={height}
-    height={height}
-    viewBox="0 0 556 735"
-    fill="none"
-    {...rest}
-  >
+const SVG = () => (
+  <svg width="100%" height="100%" viewBox="0 0 556 735" fill="none">
     <g
       className="background-one"
       style={{
@@ -66,16 +60,18 @@ const SVG = ({ height = 735, ...rest }) => (
   </svg>
 )
 
-const Avatar = ({ height, className }) => (
+const Avatar = ({ className }) => (
   <div className={className}>
-    <SVG height={height} />
+    <SVG />
   </div>
 )
 
 export default styled(Avatar)`
   display: inline-block;
   border-radius: 50%;
-  padding: .5rem;
+  padding: 0.5rem;
+  height: ${props => props.size};
+  width: ${props => props.size};
 
   .background-one {
     fill: ${props => props.theme.colors.avatar.bg1};

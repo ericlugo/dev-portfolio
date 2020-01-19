@@ -6,57 +6,54 @@ import { FiFeather } from "react-icons/fi"
 import navLinks from "../../constants/navLinks"
 import socialLinks from "../../constants/socialLinks"
 
-const Footer = () => {
-  return (
-    <FooterWrapper>
-      <div className="widthContainer">
-        <div className="links">
-          {navLinks.map((item, index) => (
-            <AniLink key={index} fade to={item.path}>
-              > {item.text}
-            </AniLink>
-          ))}
-        </div>
-        <div className="social">
-          {socialLinks.map((item, index) => (
-            <a
-              key={index}
-              href={item.url}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {item.icon}
-            </a>
-          ))}
-        </div>
-        <div className="credit">
-          Icons courtesy of:{" "}
-          <a href="https://feathericons.com/">
-            <div>
-              <FiFeather />
-              FeatherIcons
-            </div>
-          </a>
-        </div>
-        <div className="copy">
-          <h6>
-            copyright &copy; Eric SarragaLugo {new Date().getFullYear()}
-            <br />
-            all rights reserved
-          </h6>
-        </div>
+const Footer = ({ className }) => (
+  <footer className={className}>
+    <div className="widthContainer">
+      <div className="links">
+        {navLinks.map((item, index) => (
+          <AniLink key={index} fade to={item.path}>
+            > {item.text}
+          </AniLink>
+        ))}
       </div>
-    </FooterWrapper>
-  )
-}
+      <div className="social">
+        {socialLinks.map((item, index) => (
+          <a
+            key={index}
+            href={item.url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {item.icon}
+          </a>
+        ))}
+      </div>
+      <div className="credit">
+        Icons courtesy of:{" "}
+        <a href="https://feathericons.com/">
+          <div>
+            <FiFeather />
+            FeatherIcons
+          </div>
+        </a>
+      </div>
+      <div className="copy">
+        <h6>
+          copyright &copy; Eric SarragaLugo {new Date().getFullYear()}
+          <br />
+          all rights reserved
+        </h6>
+      </div>
+    </div>
+  </footer>
+)
 
-export default Footer
-
-const FooterWrapper = styled.footer`
+export default styled(Footer)`
   margin-top: auto;
-  padding: 1rem 0.25rem 3rem;
+  padding: 1rem 0.25rem 2rem;
   background-color: ${props => props.theme.colors.foregroundColor};
   color: ${props => props.theme.colors.backgroundColor};
+  box-shadow: ${props => props.theme.effects.shadow};
 
   a {
     color: ${props => props.theme.colors.backgroundColor};
@@ -83,7 +80,6 @@ const FooterWrapper = styled.footer`
       }
     }
   }
-
   .links {
     grid-area: links;
 
@@ -99,7 +95,6 @@ const FooterWrapper = styled.footer`
       }
     }
   }
-
   .social {
     grid-area: social;
     display: grid;
@@ -118,13 +113,11 @@ const FooterWrapper = styled.footer`
       &:active {
         color: ${props => props.theme.colors.backgroundColor};
       }
-
       svg {
         stroke-width: 1px;
       }
     }
   }
-
   .credit {
     grid-area: credit;
     text-align: center;
@@ -135,7 +128,6 @@ const FooterWrapper = styled.footer`
       text-align: center;
     }
   }
-
   .copy {
     grid-area: copy;
     text-transform: uppercase;
