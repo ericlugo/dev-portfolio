@@ -8,19 +8,19 @@ import {
 
 export default [
   {
-    url: "https://codepen.io/",
-    icon: <Codepen />,
-  },
-  {
-    url: "https://github.com/",
-    icon: <Github />,
+    url: "https://twitter.com/",
+    icon: <Twitter />,
   },
   {
     url: "https://www.linkedin.com/",
     icon: <LinkedIn />,
   },
   {
-    url: "https://twitter.com/",
-    icon: <Twitter />,
+    url: "https://codepen.io/",
+    icon: <Codepen />,
+  },
+  {
+    url: "https://github.com/",
+    icon: <Github />,
   },
 ]

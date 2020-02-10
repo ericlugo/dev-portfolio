@@ -1,4 +1,8 @@
-import { createGlobalStyle, css } from "styled-components"
+import React from "react"
+import {
+  createGlobalStyle,
+  ThemeProvider as StyleProvider,
+} from "styled-components"
 import reset from "styled-reset"
 
 const palettes = {
@@ -35,11 +39,11 @@ const baseTheme = {
     codeFont: "'IBM Plex Mono', monospace",
     lineHeight: "1.45rem",
     fontBase: "100%", //around 16px, but can be overwritten in browser settings
-    headerSize: "2.827rem", //around 45px
-    subHeaderSize: "1.999rem", //around 32px
-    sectionSize: "1.414rem", //around 23px
+    headerSize: "3.052rem", //around 49px
+    subHeaderSize: "1.953rem", //around 31px
+    sectionSize: "1.563rem", //around 25px
     paragraphSize: "1rem", //around 16px, same as fontBase
-    smallText: "0.707rem", //around 11px
+    smallText: "0.8rem", //around 13px
   },
   spacing: {
     mainPadding: "1rem",
@@ -53,8 +57,8 @@ const baseTheme = {
   },
 }
 
-export const siteThemes = {
-  lightTheme: {
+const siteThemes = {
+  light: {
     ...baseTheme,
     colors: {
       backgroundColor: palettes.paletteNo1.background,
@@ -79,44 +83,76 @@ export const siteThemes = {
       inset:
         "inset -.3rem -.3rem .5rem rgba(255,255,255,0.7), inset -.3rem .3rem .3rem rgba(150,150,150,0.5), inset .3rem -.3rem .3rem rgba(150,150,150,0.5), inset .3rem .3rem .5rem rgba(0,0,0,0.5)",
       toggleSwitchShadow:
-        "inset -.1rem -.1rem .3rem rgba(0,0,0,0.3), inset .1rem -.1rem .3rem rgba(250,250,250,0.3), inset -.1rem .1rem .3rem rgba(250,250,250,0.3), inset .1rem .1rem .3rem rgba(255,255,255,0.5), .1rem .1rem .3rem rgba(0,0,0,0.3)",
+        "inset -.1rem -.1rem .3rem rgba(0,0,0,0.3), inset .1rem -.1rem .3rem rgba(250,250,250,0.3), inset -.1rem .1rem .3rem rgba(250,250,250,0.3), inset .1rem .1rem .3rem rgba(255,255,255,0.5)",
     },
   },
-  darkTheme: {
+  dark: {
     ...baseTheme,
     colors: {
-      backgroundColor: palettes.paletteNo3.background,
-      foregroundColor: palettes.paletteNo3.foreground,
-      accentDark: palettes.paletteNo3.accentDark,
-      accentLight: palettes.paletteNo3.accentLight,
+      backgroundColor: palettes.paletteNo1.background,
+      foregroundColor: palettes.paletteNo1.foreground,
+      accentDark: palettes.paletteNo1.accentDark,
+      accentLight: palettes.paletteNo1.accentLight,
       avatar: {
-        bg1: palettes.paletteNo3.accentDark,
-        bg2: palettes.paletteNo3.accentLight,
-        main: palettes.paletteNo3.foreground,
-        accent: palettes.paletteNo3.foreground,
+        bg1: palettes.paletteNo1.accentDark,
+        bg2: palettes.paletteNo1.accentLight,
+        main: palettes.paletteNo1.foreground,
+        accent: palettes.paletteNo1.foreground,
       },
       toggle: {
-        default: palettes.paletteNo3.background,
-        switchActive: palettes.paletteNo3.accentLight,
-        notchActive: palettes.paletteNo3.accentDark,
+        default: palettes.paletteNo1.background,
+        switchActive: palettes.paletteNo1.accentLight,
+        notchActive: palettes.paletteNo1.accentDark,
       },
     },
     effects: {
       shadow:
-        ".3rem .3rem .5rem rgba(0,0,0,0.3), .3rem -.3rem .5rem rgba(50,50,50,0.15), -.3rem .3rem .5rem rgba(50,50,50,0.15), -.3rem -.3rem .5rem rgba(100,100,100,0.3)",
+        ".3rem .3rem .5rem rgba(0,0,0,0.5), .3rem -.3rem .5rem rgba(250,250,250,0.5), -.3rem .3rem .5rem rgba(250,250,250,0.5), -.3rem -.3rem .5rem rgba(255,255,255,0.7)",
       inset:
-        "inset -.3rem -.3rem .5rem rgba(100,100,100,0.3), inset -.3rem .3rem .3rem rgba(50,50,50,0.15), inset .3rem -.3rem .3rem rgba(50,50,50,0.15), inset .3rem .3rem .5rem rgba(0,0,0,0.3)",
-      toggleSwitch:
-        ".1rem .1rem .3rem rgba(0,0,0,0.1), .1rem -.1rem .3rem rgba(50,50,50,0.05), -.1rem .1rem .3rem rgba(50,50,50,0.05), -.1rem -.1rem .3rem rgba(100,100,100,0.15)",
+        "inset -.3rem -.3rem .5rem rgba(255,255,255,0.7), inset -.3rem .3rem .3rem rgba(150,150,150,0.5), inset .3rem -.3rem .3rem rgba(150,150,150,0.5), inset .3rem .3rem .5rem rgba(0,0,0,0.5)",
+      toggleSwitchShadow:
+        "inset -.1rem -.1rem .3rem rgba(0,0,0,0.3), inset .1rem -.1rem .3rem rgba(250,250,250,0.3), inset -.1rem .1rem .3rem rgba(250,250,250,0.3), inset .1rem .1rem .3rem rgba(255,255,255,0.5)",
     },
   },
+}
+
+const initialState = {
+  dark: false,
+  theme: siteThemes.light,
+  toggleTheme: () => {},
+}
+
+export const ThemeContext = React.createContext(initialState)
+
+export function ThemeProvider({ children }) {
+  const [dark, setDark] = React.useState(false)
+
+  React.useEffect(() => {
+    const isDark = localStorage.getItem("dark") === "true"
+    setDark(isDark)
+  }, [dark])
+
+  const toggle = () => {
+    const isDark = !dark
+    localStorage.setItem("dark", JSON.stringify(isDark))
+    setDark(isDark)
+  }
+
+  const theme = dark ? siteThemes.dark : siteThemes.light
+
+  return (
+    <ThemeContext.Provider value={{ theme, dark, toggle }}>
+      <StyleProvider theme={theme}>{children}</StyleProvider>
+    </ThemeContext.Provider>
+  )
 }
 
 export const GlobalStyle = createGlobalStyle`
   ${reset}
 
   * {
-    transition: all .3s ease-in-out;
+    transition: color .3s ease-in-out;
+    box-sizing: border-box;
   }
   body {
     background-color: ${props => props.theme.colors.backgroundColor};
@@ -125,16 +161,11 @@ export const GlobalStyle = createGlobalStyle`
     font-weight: 400;
     font-family: ${props => props.theme.typography.mainFont};
   }
-  main {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
   h1 {
     font-family: ${props => props.theme.typography.headerFont};
     font-size: ${props => props.theme.typography.headerSize}
   }
-  h2 {
+  h3 {
     font-family: ${props => props.theme.typography.headerFont};
     font-size: ${props => props.theme.typography.subHeaderSize};
   }
@@ -151,30 +182,9 @@ export const GlobalStyle = createGlobalStyle`
     text-decoration: none;
     font-size: ${props => props.theme.typography.paragraphSize};
     font-family: ${props => props.theme.typography.codeFont};
+    transition: color .3s ease-in-out;
   }
   p {
     line-height: ${props => props.theme.typography.lineHeight};
   }
-  .raised {
-  }
-  .inset {
-  }
-  .widthContainer {
-  }
-`
-
-export const raised = css`
-  margin: 0.5rem;
-  border-radius: 1rem;
-  box-shadow: ${props => props.theme.effects.shadow};
-`
-export const inset = css`
-  height: 100%;
-  width: 100%;
-  border-radius: 0.5rem;
-  box-shadow: ${props => props.theme.effects.inset};
-`
-export const maxWidth = css`
-  margin: 0 auto;
-  max-width: 1200px;
 `

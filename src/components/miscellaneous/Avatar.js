@@ -69,10 +69,12 @@ const Avatar = ({ className }) => (
 export default styled(Avatar)`
   display: inline-block;
   border-radius: 50%;
-  padding: 0.5rem;
-  height: ${props => props.size};
-  width: ${props => props.size};
+  height: ${props => props.size}rem;
+  width: ${props => props.size * 0.76}rem;
 
+  svg {
+    margin: 0 auto;
+  }
   .background-one {
     fill: ${props => props.theme.colors.avatar.bg1};
   }
