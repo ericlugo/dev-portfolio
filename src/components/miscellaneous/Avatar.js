@@ -1,5 +1,5 @@
 import React from "react"
-import styled from "styled-components"
+import styled, { css, keyframes } from "styled-components"
 
 const SVG = () => (
   <svg width="100%" height="100%" viewBox="0 0 556 735" fill="none">
@@ -60,6 +60,23 @@ const SVG = () => (
   </svg>
 )
 
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+    transform: scale(0,0) rotate(180deg);
+  }
+  90% {
+    opacity: 100%;
+    transform: scale(110%,110%) rotate(375deg);
+  }
+  100% {
+    transform: scale(100%,100%) rotate(360deg);
+  }
+`
+
 const Avatar = ({ className }) => (
   <div className={className}>
     <SVG />
@@ -68,9 +85,29 @@ const Avatar = ({ className }) => (
 
 export default styled(Avatar)`
   display: inline-block;
+  position: relative;
   border-radius: 50%;
-  height: ${props => props.size}rem;
-  width: ${props => props.size * 0.76}rem;
+  padding: 0.5rem;
+  left: -0.5rem;
+  height: ${props => props.size + 1}rem;
+  width: ${props => props.size + 1}rem;
+
+  ${props =>
+    props.dark
+      ? css`
+          background-color: ${props => props.theme.colors.foregroundColor};
+          left: 0rem;
+        `
+      : css`
+          background-color: ${props => props.theme.colors.backgroundColor};
+          left: -0.5rem;
+        `};
+  ${props =>
+    props.fresh &&
+    props.dark &&
+    css`
+      animation: ${fadeIn} 0.6s ease-in-out;
+    `};
 
   svg {
     margin: 0 auto;

@@ -9,7 +9,7 @@ import React from "react"
 
 const MenuIcon = ({ className, size }) => {
   return (
-    <button>
+    <button className={className}>
       <span></span>
       <span></span>
       <span></span>

@@ -1,6 +1,5 @@
 import React from "react"
 import styled from "styled-components"
-import { Location } from "@reach/router"
 import { ThemeProvider, GlobalStyle } from "../../constants/theme.js"
 
 import Header from "./Header"
@@ -17,19 +16,17 @@ const Main = styled.main`
     margin: 0 auto;
     width: 100%;
     max-width: ${props => props.theme.breakpoints.md};
+
+    @media (max-width: ${props => props.theme.breakpoints.md}) {
+      padding: 0 0.5rem;
+    }
   }
 `
 
 export const AppWrapper = ({ className, children }) => (
   <ThemeProvider>
     <GlobalStyle />
-    <Location>
-      {({ location: { pathname: currentPath } }) => (
-        <Main path={currentPath} className={className}>
-          {children}
-        </Main>
-      )}
-    </Location>
+    <Main className={className}>{children}</Main>
   </ThemeProvider>
 )
 

@@ -7,6 +7,18 @@ import reset from "styled-reset"
 
 const palettes = {
   paletteNo1: {
+    light: {
+      background: "#EFF1F3",
+      foreground: "#2F323A",
+      accentDark: "#33658A",
+      accentLight: "#86BBD8",
+    },
+    dark: {
+      background: "#2F323A",
+      foreground: "#EFF1F3",
+      accentDark: "#86BBD8",
+      accentLight: "#33658A",
+    },
     background: "#EFF1F3",
     foreground: "#2F323A",
     accentDark: "#33658A",
@@ -61,20 +73,20 @@ const siteThemes = {
   light: {
     ...baseTheme,
     colors: {
-      backgroundColor: palettes.paletteNo1.background,
-      foregroundColor: palettes.paletteNo1.foreground,
-      accentDark: palettes.paletteNo1.accentDark,
-      accentLight: palettes.paletteNo1.accentLight,
+      backgroundColor: palettes.paletteNo1.light.background,
+      foregroundColor: palettes.paletteNo1.light.foreground,
+      accentDark: palettes.paletteNo1.light.accentDark,
+      accentLight: palettes.paletteNo1.light.accentLight,
       avatar: {
-        bg1: palettes.paletteNo1.accentLight,
-        bg2: palettes.paletteNo1.accentLight,
-        main: palettes.paletteNo1.foreground,
-        accent: palettes.paletteNo1.accentDark,
+        bg1: palettes.paletteNo1.light.accentLight,
+        bg2: palettes.paletteNo1.light.accentLight,
+        main: palettes.paletteNo1.light.foreground,
+        accent: palettes.paletteNo1.light.accentDark,
       },
       toggle: {
-        default: palettes.paletteNo1.background,
-        switchActive: palettes.paletteNo1.accentLight,
-        notchActive: palettes.paletteNo1.accentDark,
+        default: palettes.paletteNo1.light.background,
+        switchActive: palettes.paletteNo1.light.accentLight,
+        notchActive: palettes.paletteNo1.light.accentDark,
       },
     },
     effects: {
@@ -89,27 +101,27 @@ const siteThemes = {
   dark: {
     ...baseTheme,
     colors: {
-      backgroundColor: palettes.paletteNo1.background,
-      foregroundColor: palettes.paletteNo1.foreground,
-      accentDark: palettes.paletteNo1.accentDark,
-      accentLight: palettes.paletteNo1.accentLight,
+      backgroundColor: palettes.paletteNo1.dark.background,
+      foregroundColor: palettes.paletteNo1.dark.foreground,
+      accentDark: palettes.paletteNo1.dark.accentDark,
+      accentLight: palettes.paletteNo1.dark.accentLight,
       avatar: {
-        bg1: palettes.paletteNo1.accentDark,
-        bg2: palettes.paletteNo1.accentLight,
-        main: palettes.paletteNo1.foreground,
-        accent: palettes.paletteNo1.foreground,
+        bg1: palettes.paletteNo1.dark.accentDark,
+        bg2: palettes.paletteNo1.dark.accentLight,
+        main: palettes.paletteNo1.dark.background,
+        accent: palettes.paletteNo1.dark.background,
       },
       toggle: {
-        default: palettes.paletteNo1.background,
-        switchActive: palettes.paletteNo1.accentLight,
-        notchActive: palettes.paletteNo1.accentDark,
+        default: palettes.paletteNo1.dark.background,
+        switchActive: palettes.paletteNo1.dark.accentLight,
+        notchActive: palettes.paletteNo1.dark.accentDark,
       },
     },
     effects: {
       shadow:
         ".3rem .3rem .5rem rgba(0,0,0,0.5), .3rem -.3rem .5rem rgba(250,250,250,0.5), -.3rem .3rem .5rem rgba(250,250,250,0.5), -.3rem -.3rem .5rem rgba(255,255,255,0.7)",
       inset:
-        "inset -.3rem -.3rem .5rem rgba(255,255,255,0.7), inset -.3rem .3rem .3rem rgba(150,150,150,0.5), inset .3rem -.3rem .3rem rgba(150,150,150,0.5), inset .3rem .3rem .5rem rgba(0,0,0,0.5)",
+        "inset -.3rem -.3rem .5rem rgba(100,100,100,0.7), inset -.3rem .3rem .3rem rgba(50,50,50,0.5), inset .3rem -.3rem .3rem rgba(50,50,50,0.5), inset .3rem .3rem .5rem rgba(0,0,0,0.5)",
       toggleSwitchShadow:
         "inset -.1rem -.1rem .3rem rgba(0,0,0,0.3), inset .1rem -.1rem .3rem rgba(250,250,250,0.3), inset -.1rem .1rem .3rem rgba(250,250,250,0.3), inset .1rem .1rem .3rem rgba(255,255,255,0.5)",
     },
@@ -118,30 +130,36 @@ const siteThemes = {
 
 const initialState = {
   dark: false,
+  flag: true,
   theme: siteThemes.light,
-  toggleTheme: () => {},
 }
 
 export const ThemeContext = React.createContext(initialState)
 
 export function ThemeProvider({ children }) {
   const [dark, setDark] = React.useState(false)
+  const [fresh, setFresh] = React.useState(true)
 
   React.useEffect(() => {
     const isDark = localStorage.getItem("dark") === "true"
+    const isNotFresh = localStorage.getItem("fresh") === "false"
     setDark(isDark)
-  }, [dark])
+    if (fresh === isNotFresh) setFresh(!isNotFresh)
+  }, [dark, fresh])
 
   const toggle = () => {
     const isDark = !dark
+    const isFresh = true
     localStorage.setItem("dark", JSON.stringify(isDark))
+    localStorage.setItem("fresh", JSON.stringify(isFresh))
     setDark(isDark)
+    setFresh(isFresh)
   }
 
   const theme = dark ? siteThemes.dark : siteThemes.light
 
   return (
-    <ThemeContext.Provider value={{ theme, dark, toggle }}>
+    <ThemeContext.Provider value={{ theme, dark, fresh, toggle }}>
       <StyleProvider theme={theme}>{children}</StyleProvider>
     </ThemeContext.Provider>
   )

@@ -55,9 +55,18 @@ const glitch2 = keyframes`
 `
 
 const SocialBar = styled(SocialNav)`
+  max-width: ${props => props.theme.breakpoints.md};
   margin: 0 10%;
   display: flex;
   justify-content: space-around;
+
+  @media (min-width: ${props => props.theme.breakpoints.sm}) {
+    margin: 0 20%;
+  }
+
+  @media (min-width: ${props => props.theme.breakpoints.md}) {
+    margin: 0 30%;
+  }
 
   a {
     font-size: ${props => props.theme.typography.subHeaderSize};
@@ -137,7 +146,8 @@ export default () => (
           and well though out code that brings beautiful products to life. I
           yearn to learn, hold software craftsmanship and UX design in high
           regard, and I highly value the confidence that clean code brings to
-          the table.
+          the table. Tap or Click below to check out some of my work and get in
+          touch with me!
         </p>
         <MainNav className="mainNav" />
       </section>

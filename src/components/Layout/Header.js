@@ -1,23 +1,42 @@
 import React from "react"
 import styled from "styled-components"
+import { Location } from "@reach/router"
 
+import { ThemeContext } from "../../constants/theme.js"
 import Avatar from "../miscellaneous/Avatar"
 import Toggle from "../miscellaneous/Toggle"
 import MenuIcon from "../miscellaneous/MenuIcon"
 
 const Header = ({ className, size }) => (
-  <header className={className}>
-    <div className="widthContainer">
-      <Avatar className="avatar" size={[size]} />
-      <Toggle />
-      {/* <MenuIcon size={[size]} /> */}
-    </div>
-  </header>
+  <ThemeContext.Consumer>
+    {({ dark, fresh }) => (
+      <Location>
+        {({ location: { pathname: currentPath } }) => (
+          <header className={className}>
+            <div className="widthContainer">
+              <Avatar
+                className="avatar"
+                size={size}
+                dark={dark}
+                fresh={fresh}
+              />
+              <div className="menu">
+                <Toggle fresh={fresh} />
+                {currentPath !== "/" && (
+                  <MenuIcon className="menuIcon" size={[size]} />
+                )}
+              </div>
+            </div>
+          </header>
+        )}
+      </Location>
+    )}
+  </ThemeContext.Consumer>
 )
 
 export default styled(Header)`
   width: 100%;
-  margin: 0 0 0.5rem;
+  padding: 0.5rem 0;
 
   .widthContainer {
     display: flex;
@@ -25,7 +44,12 @@ export default styled(Header)`
     justify-content: space-between;
   }
 
-  .avatar {
-    margin: 0.5rem;
+  .menu {
+    display: flex;
+    align-items: center;
+
+    .menuIcon {
+      margin-left: 1rem;
+    }
   }
 `
