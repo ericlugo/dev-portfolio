@@ -57,6 +57,15 @@ collections:
           name: "body",
           widget: "markdown"
         }
+      - {
+          required: false,
+          label: "Image(s)",
+          name: "image(s)",
+          widget: "file",
+          media_library:
+            config:
+              multiple: true
+        }
   - name: "notes"
     description: "" # This is an optional description for SEO and Open Graph purposes.
     label: "Notes"
