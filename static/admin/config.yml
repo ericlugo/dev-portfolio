@@ -62,9 +62,10 @@ collections:
           label: "Image(s)",
           name: "image(s)",
           widget: "file",
-          media_library:
+          media_library: {
             config:
               multiple: true
+          }
         }
   - name: "notes"
     description: "" # This is an optional description for SEO and Open Graph purposes.
