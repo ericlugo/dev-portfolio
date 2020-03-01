@@ -9,6 +9,7 @@ site_url: https://www.ericlugo.dev
 logo_url: https://www.ericlugo.dev/images/avatar.svg
 
 publish_mode: editorial_workflow
+show_preview_links: false # Can be enabled after getting GraphQL queries and page generation up
 
 collections:
   - name: "projects"
@@ -17,7 +18,6 @@ collections:
     label_singular: "Project"
     folder: "content/project"
     slug: "{{slug}}"
-    preview_path: "project/{{slug}}"
     create: true
     delete: true
     fields:
@@ -63,7 +63,6 @@ collections:
     label_singular: "Note"
     folder: "content/note"
     slug: "{{slug}}"
-    preview_path: "note/{{slug}}"
     create: true
     delete: true
     fields:
@@ -96,7 +95,6 @@ collections:
     label: "Blog"
     folder: "content/blog"
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    preview_path: "blog/{{slug}}"
     create: true
     delete: true
     fields:
