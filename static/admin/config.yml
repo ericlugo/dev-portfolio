@@ -1,15 +1,14 @@
 backend:
   name: git-gateway
   branch: master # Branch to update (optional; defaults to master)
-  repo: ericlugo/dev-portfolio # Path to your GitHub repository
+
+media_folder: static/images/ # Media files will be stored in the repo under static/images/
+public_folder: /images/ # The src attribute for uploaded media will begin with /images/uploads
 
 site_url: https://www.ericlugo.dev
 logo_url: https://www.ericlugo.dev/images/avatar.svg
 
 publish_mode: editorial_workflow
-
-media_folder: "static/images/" # Media files will be stored in the repo under static/images/
-public_folder: "/images/" # The src attribute for uploaded media will begin with /images/uploads
 
 collections:
   - name: "projects"
