@@ -4,28 +4,27 @@ module.exports = {
     description: `Hi, I'm Eric! Are you looking for a team member you can count on? I love to delve into complex topics and thrive when working to overcome challenges. Check out my portfolio and send me a message!`,
     author: `Eric SarragaLugo`,
     // avatar: ``,
-    siteUrl: `https://ericlugo.me/`,
+    siteUrl: `https://www.ericlugo.dev/`,
     // twitter: ``,
     // codepen: ``,
     // github: ``,
   },
   plugins: [
-    // `gatsby-plugin-netlify-cms`,
+    `gatsby-plugin-netlify-cms`,
     `gatsby-plugin-react-helmet`,
-    // "gatsby-plugin-robots-txt",
     `gatsby-plugin-sharp`,
-    // `gatsby-plugin-sitemap`,
+    `gatsby-plugin-sitemap`,
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-transition-link`,
     `gatsby-transformer-sharp`,
-    // {
-    //   resolve: "gatsby-plugin-robots-txt",
-    //   options: {
-    //     host: "https://ericlugo.me/",
-    //     sitemap: "https://ericlugo.me/sitemap.xml",
-    //     policy: [{ userAgent: "*", allow: "/" }],
-    //   },
-    // },
+    {
+      resolve: "gatsby-plugin-robots-txt",
+      options: {
+        host: "https://www.ericlugo.dev/",
+        sitemap: "https://www.ericlugo.dev/sitemap.xml",
+        policy: [{ userAgent: "*", allow: "/" }],
+      },
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {

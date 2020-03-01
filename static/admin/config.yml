@@ -1,0 +1,142 @@
+backend:
+  name: git-gateway
+  branch: master # Branch to update (optional; defaults to master)
+  repo: ericlugo/dev-portfolio # Path to your GitHub repository
+
+site_url: https://www.ericlugo.dev
+logo_url: https://www.ericlugo.dev/images/avatar.svg
+
+publish_mode: editorial_workflow
+
+media_folder: "static/images/" # Media files will be stored in the repo under static/images/
+public_folder: "/images/" # The src attribute for uploaded media will begin with /images/uploads
+
+collections:
+  - name: "projects"
+    description: "" # This is an optional description for SEO and Open Graph purposes.
+    label: "Projects"
+    label_singular: "Project"
+    folder: "content/project"
+    slug: "{{slug}}"
+    preview_path: "project/{{slug}}"
+    create: true
+    delete: true
+    fields:
+      - {
+          required: true,
+          label: "Title",
+          name: "title",
+          widget: "string"
+        }
+      - {
+          required: true,
+          label: "Description",
+          name: "description",
+          widget: "text",
+        }
+      - {
+          required: true,
+          label: "Publish Date",
+          name: "date",
+          widget: "datetime",
+        }
+      - {
+          required: false,
+          label: "Languages Used",
+          name: "languages",
+          widget: "list",
+        }
+      - {
+          required: false,
+          label: "Libraries Used",
+          name: "libraries",
+          widget: "list",
+        }
+      - {
+          required: true,
+          label: "Body",
+          name: "body",
+          widget: "markdown"
+        }
+  - name: "notes"
+    description: "" # This is an optional description for SEO and Open Graph purposes.
+    label: "Notes"
+    label_singular: "Note"
+    folder: "content/note"
+    slug: "{{slug}}"
+    preview_path: "note/{{slug}}"
+    create: true
+    delete: true
+    fields:
+      - {
+          required: true,
+          label: "Title",
+          name: "title",
+          widget: "string"
+        }
+      - {
+          required: true,
+          label: "Publish Date",
+          name: "date",
+          widget: "datetime",
+        }
+      - {
+          required: false,
+          label: "Tags",
+          name: "tags",
+          widget: "list"
+        }
+      - {
+          required: true,
+          label: "Body",
+          name: "body",
+          widget: "markdown"
+        }
+  - name: "blog"
+    description: "" # This is an optional description for SEO and Open Graph purposes.
+    label: "Blog"
+    folder: "content/blog"
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    preview_path: "blog/{{slug}}"
+    create: true
+    delete: true
+    fields:
+      - {
+          required: true,
+          label: "Title",
+          name: "title",
+          widget: "string"
+        }
+      - {
+          required: true,
+          label: "Description",
+          name: "description",
+          widget: "text",
+        }
+      - {
+          required: true,
+          label: "Publish Date",
+          name: "date",
+          widget: "datetime",
+        }
+      - {
+          required: true,
+          label: "Body",
+          name: "body",
+          widget: "markdown"
+        }
+      - {
+          required: true,
+          label: "Category",
+          name: "category",
+          widget: "select",
+          options:
+            [
+              "Experiment",
+              "Technical Writeup",
+              "Retrospective",
+              "Opinion Piece",
+              "Guide",
+              "Random Musings of a Madman",
+            ],
+        }
