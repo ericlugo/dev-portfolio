@@ -63,8 +63,9 @@ collections:
           name: "image(s)",
           widget: "file",
           media_library: {
-            config:
+            config: {
               multiple: true
+            }
           }
         }
   - name: "notes"
