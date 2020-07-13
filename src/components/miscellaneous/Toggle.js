@@ -1,5 +1,5 @@
 import React from "react"
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 import { FiMoon, FiSun } from "react-icons/fi"
 
 import { ThemeContext } from "../../constants/theme.js"
@@ -11,8 +11,10 @@ const Toggle = ({ className }) => (
     {({ dark, toggle }) => (
       <div className={className}>
         <FiSun className="sun" />
+        {/* eslint-disable jsx-a11y/control-has-associated-label */}
         <label>
           <input
+            aria-hidden="true"
             type="checkbox"
             checked={dark}
             className="switch"
@@ -68,11 +70,7 @@ export default styled(Toggle)`
       position: absolute;
       top: 0;
       left: 0;
-      ${props =>
-        props.fresh &&
-        css`
-          transition: left 0.3s ease-in-out;
-        `}
+      transition: left 0.3s ease-in-out;
     }
   }
 `

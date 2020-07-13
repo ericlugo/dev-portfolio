@@ -21,7 +21,7 @@ const Header = ({ className, size }) => (
                 fresh={fresh}
               />
               <div className="menu">
-                <Toggle fresh={fresh} />
+                <Toggle />
                 {currentPath !== "/" && (
                   <MenuIcon className="menuIcon" size={[size]} />
                 )}

@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
-import { ThemeProvider, GlobalStyle } from "../../constants/theme.js"
 
+import { ThemeProvider, GlobalStyle } from "../../constants/theme.js"
 import Header from "./Header"
 import Footer from "./Footer"
 
@@ -23,17 +23,13 @@ const Main = styled.main`
   }
 `
 
-export const AppWrapper = ({ className, children }) => (
+export default ({ className, children }) => (
   <ThemeProvider>
     <GlobalStyle />
-    <Main className={className}>{children}</Main>
+    <Main className={className}>
+      <Header size={3} />
+      {children}
+      <Footer />
+    </Main>
   </ThemeProvider>
-)
-
-export default ({ children }) => (
-  <AppWrapper>
-    <Header size={3} />
-    {children}
-    <Footer />
-  </AppWrapper>
 )

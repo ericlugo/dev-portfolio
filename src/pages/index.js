@@ -1,8 +1,6 @@
 import React from "react"
 import styled, { keyframes } from "styled-components"
 
-import { AppWrapper } from "../components/Layout"
-import Header from "../components/Layout/Header"
 import MainNav from "../components/miscellaneous/MainNav"
 import SocialNav from "../components/miscellaneous/SocialNav"
 
@@ -129,8 +127,7 @@ const HomePage = styled.div`
 `
 
 export default () => (
-  <AppWrapper>
-    <Header size={3} />
+  <>
     <HomePage className="widthContainer">
       <section>
         <h1>
@@ -153,5 +150,5 @@ export default () => (
       </section>
     </HomePage>
     <SocialBar />
-  </AppWrapper>
+  </>
 )
