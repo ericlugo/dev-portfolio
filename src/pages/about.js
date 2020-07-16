@@ -2,10 +2,10 @@ import React from "react"
 
 import Footer from "../components/Layout/Footer"
 
-const Notes = () => (
+const About = () => (
   <main>
     <section className="widthContainer">
-      <h1>Notes Page</h1>
+      <h1>About Page</h1>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, quis!
       </p>
@@ -14,4 +14,4 @@ const Notes = () => (
   </main>
 )
 
-export default Notes
+export default About

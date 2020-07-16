@@ -88,7 +88,6 @@ export default styled(Avatar)`
   position: relative;
   border-radius: 50%;
   padding: 0.5rem;
-  left: -0.5rem;
   height: ${props => props.size + 1}rem;
   width: ${props => props.size + 1}rem;
 
@@ -97,13 +96,20 @@ export default styled(Avatar)`
       ? css`
           background-color: ${props => props.theme.colors.foregroundColor};
           left: 0rem;
+
+          @media (min-width: ${props => props.theme.breakpoints.md}) {
+            left: 0.5rem;
+          }
         `
       : css`
           background-color: ${props => props.theme.colors.backgroundColor};
-          left: -0.5rem;
+          left: -1rem;
+
+          @media (min-width: ${props => props.theme.breakpoints.md}) {
+            left: -0.5rem;
+          }
         `};
   ${props =>
-    props.fresh &&
     props.dark &&
     css`
       animation: ${fadeIn} 0.6s ease-in-out;

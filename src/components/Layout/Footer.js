@@ -5,32 +5,7 @@ import { FiFeather } from "react-icons/fi"
 import MainNav from "../miscellaneous/MainNav"
 import SocialNav from "../miscellaneous/SocialNav"
 
-const Footer = ({ className }) => (
-  <footer className={className}>
-    <div className="widthContainer">
-      <MainNav />
-      <SocialNav />
-      <div className="credit">
-        Icons courtesy of:{" "}
-        <a href="https://feathericons.com/">
-          <div>
-            <FiFeather />
-            FeatherIcons
-          </div>
-        </a>
-      </div>
-      <div className="copy">
-        <h6>
-          copyright &copy; Eric SarragaLugo {new Date().getFullYear()}
-          <br />
-          all rights reserved
-        </h6>
-      </div>
-    </div>
-  </footer>
-)
-
-export default styled(Footer)`
+const Footer = styled.footer`
   margin-top: auto;
   padding: 1rem 0.25rem 2rem;
   background-color: ${props => props.theme.colors.foregroundColor};
@@ -110,3 +85,28 @@ export default styled(Footer)`
     text-align: center;
   }
 `
+
+export default () => (
+  <Footer>
+    <div className="widthContainer">
+      <MainNav />
+      <SocialNav className="social" />
+      <div className="credit">
+        Icons courtesy of:{" "}
+        <a href="https://feathericons.com/">
+          <div>
+            <FiFeather />
+            FeatherIcons
+          </div>
+        </a>
+      </div>
+      <div className="copy">
+        <h6>
+          copyright &copy; Eric SarragaLugo {new Date().getFullYear()}
+          <br />
+          all rights reserved
+        </h6>
+      </div>
+    </div>
+  </Footer>
+)

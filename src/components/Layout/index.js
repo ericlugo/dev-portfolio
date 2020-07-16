@@ -1,16 +1,20 @@
 import React from "react"
 import styled from "styled-components"
-import { ThemeProvider, GlobalStyle } from "../../constants/theme.js"
 
 import Header from "./Header"
-import Footer from "./Footer"
 
-const Main = styled.main`
-  min-height: 100vh;
+const headerSize = 3
+
+const AppWrapper = styled.div`
   height: 100%;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: space-between;
+
+  main {
+    padding-top: ${headerSize + 2}rem;
+    min-height: 100vh;
+    height: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+  }
 
   .widthContainer {
     margin: 0 auto;
@@ -23,17 +27,9 @@ const Main = styled.main`
   }
 `
 
-export const AppWrapper = ({ className, children }) => (
-  <ThemeProvider>
-    <GlobalStyle />
-    <Main className={className}>{children}</Main>
-  </ThemeProvider>
-)
-
-export default ({ children }) => (
-  <AppWrapper>
-    <Header size={3} />
+export default ({ className, children }) => (
+  <AppWrapper className={className}>
+    <Header size={headerSize} />
     {children}
-    <Footer />
   </AppWrapper>
 )

@@ -50,7 +50,8 @@ const baseTheme = {
     headerFont: "'Anton', Impact, sans-serif",
     codeFont: "'IBM Plex Mono', monospace",
     lineHeight: "1.45rem",
-    fontBase: "100%", //around 16px, but can be overwritten in browser settings
+    // final measurements of the items below are based on browser settings
+    fontBase: "100%", //16px default in most browsers
     headerSize: "3.052rem", //around 49px
     subHeaderSize: "1.953rem", //around 31px
     sectionSize: "1.563rem", //around 25px
@@ -130,7 +131,6 @@ const siteThemes = {
 
 const initialState = {
   dark: false,
-  flag: true,
   theme: siteThemes.light,
 }
 
@@ -138,28 +138,22 @@ export const ThemeContext = React.createContext(initialState)
 
 export function ThemeProvider({ children }) {
   const [dark, setDark] = React.useState(false)
-  const [fresh, setFresh] = React.useState(true)
 
   React.useEffect(() => {
     const isDark = localStorage.getItem("dark") === "true"
-    const isNotFresh = localStorage.getItem("fresh") === "false"
     setDark(isDark)
-    if (fresh === isNotFresh) setFresh(!isNotFresh)
-  }, [dark, fresh])
+  }, [dark])
 
   const toggle = () => {
     const isDark = !dark
-    const isFresh = true
     localStorage.setItem("dark", JSON.stringify(isDark))
-    localStorage.setItem("fresh", JSON.stringify(isFresh))
     setDark(isDark)
-    setFresh(isFresh)
   }
 
   const theme = dark ? siteThemes.dark : siteThemes.light
 
   return (
-    <ThemeContext.Provider value={{ theme, dark, fresh, toggle }}>
+    <ThemeContext.Provider value={{ theme, dark, toggle }}>
       <StyleProvider theme={theme}>{children}</StyleProvider>
     </ThemeContext.Provider>
   )

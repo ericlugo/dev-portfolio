@@ -1,10 +1,9 @@
 import React from "react"
-import styled, { keyframes } from "styled-components"
+import styled, { css, keyframes } from "styled-components"
 
-import { AppWrapper } from "../components/Layout"
-import Header from "../components/Layout/Header"
+import { ThemeContext } from "../constants/theme.js"
 import MainNav from "../components/miscellaneous/MainNav"
-import SocialNav from "../components/miscellaneous/SocialNav"
+import SocialBar from "../components/miscellaneous/SocialBar"
 
 const glitch1 = keyframes`
   0%   { clip-path: inset(22% 0 34% 0); }
@@ -54,36 +53,10 @@ const glitch2 = keyframes`
   100% { clip-path: inset(58% 0 16% 0); }
 `
 
-const SocialBar = styled(SocialNav)`
-  max-width: ${props => props.theme.breakpoints.md};
-  margin: 0 10%;
-  display: flex;
-  justify-content: space-around;
-
-  @media (min-width: ${props => props.theme.breakpoints.sm}) {
-    margin: 0 20%;
-  }
-
-  @media (min-width: ${props => props.theme.breakpoints.md}) {
-    margin: 0 30%;
-  }
-
-  a {
-    font-size: ${props => props.theme.typography.subHeaderSize};
-
-    svg {
-      stroke-width: 1.5px;
-    }
-  }
-`
-
-const HomePage = styled.div`
-  display: flex;
-  flex-flow: column nowrap;
+const HomePage = styled.main`
   justify-content: space-between;
-  padding: 0.5rem;
 
-  section p {
+  p {
     margin: 1.5rem 0;
   }
 
@@ -91,7 +64,7 @@ const HomePage = styled.div`
     display: inline-block;
     font-size: 6rem;
     line-height: 8rem;
-    margin: -2rem 0;
+    margin: -1rem 0 -2rem;
     font-weight: 900;
     letter-spacing: 5px;
     position: relative;
@@ -107,13 +80,31 @@ const HomePage = styled.div`
     }
 
     &::before {
-      text-shadow: 0.1rem 0 0 ${props => props.theme.colors.accentLight};
+      ${props =>
+        props.dark
+          ? css`
+              text-shadow: 0.15rem 0 0
+                ${props => props.theme.colors.accentLight};
+            `
+          : css`
+              text-shadow: 0.05rem 0 0
+                ${props => props.theme.colors.accentLight};
+            `}
       color: ${props => props.theme.colors.foregroundColor};
       animation: ${glitch1} 10s infinite linear alternate-reverse;
     }
 
     &:after {
-      text-shadow: -0.1rem 0 0 ${props => props.theme.colors.accentLight};
+      ${props =>
+        props.dark
+          ? css`
+              text-shadow: -0.15rem 0 0
+                ${props => props.theme.colors.accentLight};
+            `
+          : css`
+              text-shadow: -0.05rem 0 0
+                ${props => props.theme.colors.accentLight};
+            `}
       color: ${props => props.theme.colors.foregroundColor};
       animation: ${glitch2} 7.5s infinite linear alternate-reverse;
     }
@@ -128,30 +119,32 @@ const HomePage = styled.div`
   }
 `
 
-export default () => (
-  <AppWrapper>
-    <Header size={3} />
-    <HomePage className="widthContainer">
-      <section>
-        <h1>
-          Hi, I'm{" "}
-          <span data-text="Eric" className="glitch">
-            Eric
-          </span>
-          .
-        </h1>
-        <p>
-          A full-stack developer with a passion for making intentional,
-          inspiring, and user-focused software. I'm in love with creating clean
-          and well though out code that brings beautiful products to life. I
-          yearn to learn, hold software craftsmanship and UX design in high
-          regard, and I highly value the confidence that clean code brings to
-          the table. Tap or Click below to check out some of my work and get in
-          touch with me!
-        </p>
-        <MainNav className="mainNav" />
-      </section>
-    </HomePage>
-    <SocialBar />
-  </AppWrapper>
+export default ({ className }) => (
+  <ThemeContext.Consumer>
+    {({ dark }) => (
+      <HomePage className={className} dark={dark}>
+        <div />
+        <section className="widthContainer">
+          <h1>
+            Hi, I'm{" "}
+            <span data-text="Eric" className="glitch">
+              Eric
+            </span>
+            .
+          </h1>
+          <p>
+            A full-stack developer with a passion for making intentional,
+            inspiring, and user-focused software. I'm in love with creating
+            clean and well though out code that brings beautiful products to
+            life. I yearn to learn, hold software craftsmanship and UX design in
+            high regard, and I highly value the confidence that clean code
+            brings to the table. Tap or Click below to check out some of my work
+            and get in touch with me!
+          </p>
+          <MainNav className="mainNav" />
+        </section>
+        <SocialBar />
+      </HomePage>
+    )}
+  </ThemeContext.Consumer>
 )
