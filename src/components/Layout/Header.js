@@ -9,17 +9,12 @@ import MenuIcon from "../miscellaneous/MenuIcon"
 
 const Header = ({ className, size }) => (
   <ThemeContext.Consumer>
-    {({ dark, fresh }) => (
+    {({ dark }) => (
       <Location>
         {({ location: { pathname: currentPath } }) => (
           <header className={className}>
             <div className="widthContainer">
-              <Avatar
-                className="avatar"
-                size={size}
-                dark={dark}
-                fresh={fresh}
-              />
+              <Avatar className="avatar" size={size} dark={dark} />
               <div className="menu">
                 <Toggle />
                 {currentPath !== "/" && (
@@ -37,6 +32,9 @@ const Header = ({ className, size }) => (
 export default styled(Header)`
   width: 100%;
   padding: 0.5rem 0;
+  position: absolute;
+  top: 0;
+  z-index: 10;
 
   .widthContainer {
     display: flex;

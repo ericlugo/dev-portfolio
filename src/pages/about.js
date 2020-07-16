@@ -1,10 +1,17 @@
 import React from "react"
 
-const Contact = () => (
-  <div className="widthContainer">
-    <h1>Contact Page</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, quis!</p>
-  </div>
+import Footer from "../components/Layout/Footer"
+
+const About = () => (
+  <main>
+    <section className="widthContainer">
+      <h1>About Page</h1>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, quis!
+      </p>
+    </section>
+    <Footer />
+  </main>
 )
 
-export default Contact
+export default About

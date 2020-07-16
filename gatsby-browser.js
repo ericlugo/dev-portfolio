@@ -4,8 +4,17 @@ import "typeface-ibm-plex-mono"
 
 import React from "react"
 import Layout from "./src/components/Layout"
+import { ThemeProvider, GlobalStyle } from "./src/constants/theme.js"
 
-// Wraps every page in a component
-export const wrapPageElement = ({ element, props }) => {
-  return <Layout {...props}>{element}</Layout>
-}
+// Wraps root component to set providers
+export const wrapRootElement = ({ element }) => (
+  <ThemeProvider>
+    <GlobalStyle />
+    {element}
+  </ThemeProvider>
+)
+
+// Wraps every page in a component with components that we don't want to reload.
+export const wrapPageElement = ({ element, props }) => (
+  <Layout {...props}>{element}</Layout>
+)
